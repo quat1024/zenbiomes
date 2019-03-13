@@ -1,0 +1,16 @@
+[
+{
+  "modid": "zenbiomes",
+  "name": "Zen Biomes",
+  "description": "Control biome placement with ZenScript",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["quaternary"],
+  "credits": "Despacito",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
