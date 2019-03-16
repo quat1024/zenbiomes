@@ -11,7 +11,7 @@ public interface Layer extends Function1<LayerFactory, LayerFactory> {
 	
 	default Layer seed(long newSeed) {
 		//function that ignores the passed-in seed in favor of newSeed
-		return (parent) -> (seed) -> this.apply(parent).apply(newSeed);
+		return (parent) -> (seed, world) -> this.apply(parent).apply(newSeed, world);
 	}
 	
 	/// Composing layers with eachother
