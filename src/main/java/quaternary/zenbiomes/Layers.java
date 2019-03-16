@@ -1,27 +1,27 @@
 package quaternary.zenbiomes;
 
-import io.vavr.collection.Iterator;
-import io.vavr.collection.Stream;
-import quaternary.zenbiomes.func.Layer;
+import net.minecraft.world.gen.layer.GenLayerIsland;
+import net.minecraft.world.gen.layer.GenLayerSmooth;
+import net.minecraft.world.gen.layer.GenLayerZoom;
+import quaternary.zenbiomes.layer.AbstractLayer;
+import quaternary.zenbiomes.layer.CompoundLayer;
+import quaternary.zenbiomes.layer.OneParentLayer;
+import quaternary.zenbiomes.layer.ZeroParentLayer;
 
-import java.util.Arrays;
-
-public class Layers {
-	//with array
-	public static Layer chain(Layer... components) {
-		return chain(Stream.ofAll(Arrays.asList(components)));
+public class LayersNew {
+	public static AbstractLayer zoom() {
+		return new OneParentLayer(GenLayerZoom::new);
 	}
 	
-	public static Layer compose(Layer... components) {
-		return compose(Stream.ofAll(Arrays.asList(components)));
+	public static AbstractLayer initIslands() {
+		return new ZeroParentLayer(GenLayerIsland::new);
 	}
 	
-	//with vavr Stream
-	public static Layer chain(Stream<Layer> components) {
-		return components.head().then(components.tail());
+	public static AbstractLayer smooth() {
+		return new OneParentLayer(GenLayerSmooth::new);
 	}
 	
-	public static Layer compose(Stream<Layer> components) {
-		return components.head().compose(components.tail());
+	public static AbstractLayer compound(AbstractLayer... others) {
+		return new CompoundLayer(others);
 	}
 }
