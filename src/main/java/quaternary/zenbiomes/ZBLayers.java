@@ -9,13 +9,13 @@ import quaternary.zenbiomes.genlayer.GenLayerReplace;
 public class ZBLayers {
 	//Constant
 	public static Layer constant(int constant) {
-		return (parent) -> (seed) -> new GenLayerConstant(constant);
+		return (parent) -> (seed, world) -> new GenLayerConstant(constant);
 	}
 	
 	//Replace
 	//replace(3, 4)
 	public static Layer replace(int source, int destination) {
-		return (parent) -> (seed) -> new GenLayerReplace(source, destination, parent.apply(seed + 1));
+		return (parent) -> (seed, world) -> new GenLayerReplace(source, destination, parent.apply(seed + 1, world));
 	}
 	
 	//replace(3).with(4)
@@ -26,7 +26,7 @@ public class ZBLayers {
 	//Circle
 	//circle(0, 0, 100, a, b)
 	public static Layer circle(int centerX, int centerY, int radius, LayerFactory inside) {
-		return (parent) -> (seed) -> new GenLayerChoiceCircle(centerX, centerY, radius, inside.apply(seed + 1), parent.apply(seed + 1));
+		return (parent) -> (seed, world) -> new GenLayerChoiceCircle(centerX, centerY, radius, inside.apply(seed + 1, world), parent.apply(seed + 1, world));
 	}
 	
 	//circle.center(0, 0).radius(100).inside(a)
