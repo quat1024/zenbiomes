@@ -25,8 +25,8 @@ public class ZBLayers {
 	
 	//Circle
 	//circle(0, 0, 100, a, b)
-	public static Layer circle(int centerX, int centerY, int radius, LayerFactory inside) {
-		return (parent) -> (seed, world) -> new GenLayerChoiceCircle(centerX, centerY, radius, inside.apply(seed + 1, world), parent.apply(seed + 1, world));
+	public static Layer circle(int centerX, int centerY, int radius, Layer inside) {
+		return (parent) -> (seed, world) -> new GenLayerChoiceCircle(centerX, centerY, radius, inside.flatten().apply(seed + 1, world), parent.apply(seed + 1, world));
 	}
 	
 	//circle.center(0, 0).radius(100).inside(a)
@@ -47,7 +47,7 @@ public class ZBLayers {
 		}
 		
 		public interface Circle_2 {
-			Layer inside(LayerFactory inside);
+			Layer inside(Layer inside);
 		}
 	}
 }

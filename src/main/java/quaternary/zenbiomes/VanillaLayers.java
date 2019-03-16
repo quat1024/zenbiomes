@@ -51,8 +51,8 @@ public class VanillaLayers {
 	public static final Layer fuzzyZoom = fromConstructor(GenLayerFuzzyZoom::new);
 	
 	//hills(riverLayer)
-	public static Layer hills(LayerFactory parentRiver) {
-		return (parentBiome) -> (seed, world) -> new GenLayerHills(seed, parentBiome.apply(seed + 1, world), parentRiver.apply(seed + 1, world));
+	public static Layer hills(Layer parentRiver) {
+		return (parentBiome) -> (seed, world) -> new GenLayerHills(seed, parentBiome.apply(seed + 1, world), parentRiver.flatten().apply(seed + 1, world));
 	}
 	
 	//hills.river(riverLayer)
@@ -69,8 +69,8 @@ public class VanillaLayers {
 	public static final Layer riverInit = fromConstructor(GenLayerRiverInit::new);
 	
 	//riverMix(riverLayer)
-	public static Layer riverMix(LayerFactory parentRiver) {
-		return (parentBiome) -> (seed, world) -> new GenLayerRiverMix(seed, parentBiome.apply(seed + 1, world), parentRiver.apply(seed + 1, world));
+	public static Layer riverMix(Layer parentRiver) {
+		return (parentBiome) -> (seed, world) -> new GenLayerRiverMix(seed, parentBiome.apply(seed + 1, world), parentRiver.flatten().apply(seed + 1, world));
 	}
 	
 	//riverMix.river(riverLayer)
@@ -86,7 +86,7 @@ public class VanillaLayers {
 	
 	public static class DSL {
 		public interface Hills_0 {
-			Layer river(LayerFactory river);
+			Layer river(Layer river);
 		}
 		
 		public interface River_0 extends Hills_0 {}
