@@ -21,10 +21,17 @@ repositories {
 	}
 }
 
+configurations {
+	jarinjar {
+		transitive = false
+	}
+}
+
 dependencies {
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.15.527"
-	//todo: shadow this
+	
 	compile "io.vavr:vavr:0.10.0"
+	jarinjar "io.vavr:vavr:0.10.0"
 }
 
 minecraft {
@@ -35,6 +42,25 @@ minecraft {
 	makeObfSourceJar = false
 
 	replace "GRADLE:VERSION", project.version
+}
+
+jar {
+	//basically shamelessly stolen from Clothesline's buildscript.
+	
+	//if you're here from browsing github for jar-in-jar examples:
+	//don't forget to check the meta-inf folder, there's an important file in there.
+	
+	//copy all jarinjar-marked dependency jars into the libraries folder
+	from(configurations.jarinjar.files) {
+		include "*"
+		into "META-INF/libraries"
+	}
+	
+	//add the forge containeddeps weirdness??? hopefully this works???
+	manifest {
+		attributes "ContainedDeps": configurations.jarinjar.files.collect{it.name}.join(" ")
+		attributes "Timestamp": System.currentTimeMillis()
+	}
 }
 
 processResources {
