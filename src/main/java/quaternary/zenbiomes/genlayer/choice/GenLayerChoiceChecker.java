@@ -1,4 +1,4 @@
-package quaternary.zenbiomes.genlayer;
+package quaternary.zenbiomes.genlayer.choice;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.world.gen.layer.GenLayer;

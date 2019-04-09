@@ -3,7 +3,7 @@ package quaternary.zenbiomes;
 import crafttweaker.annotations.ZenRegister;
 import quaternary.zenbiomes.etc.PropertiedLayer;
 import quaternary.zenbiomes.func.Layer;
-import quaternary.zenbiomes.genlayer.GenLayerChoiceCircle;
+import quaternary.zenbiomes.genlayer.choice.GenLayerChoiceCircle;
 import quaternary.zenbiomes.genlayer.GenLayerConstant;
 import quaternary.zenbiomes.genlayer.GenLayerReplace;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -43,16 +43,10 @@ public class ZBLayers {
 	}
 	
 	//TODO other cool things:
-	//math functions
-	// add
-	// negate
-	// multiply
-	// random
 	//transformations
 	// rotate 90
 	// flip
 	// uneven zooms
-	// rough zooms (pixely)
 	// zigzag (offset rows/cols)
 	//shapes
 	// spiral
