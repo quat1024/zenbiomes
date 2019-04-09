@@ -1,11 +1,17 @@
 package quaternary.zenbiomes;
 
+import crafttweaker.annotations.ZenRegister;
+import quaternary.zenbiomes.etc.PropertiedLayer;
 import quaternary.zenbiomes.func.Layer;
-import quaternary.zenbiomes.func.LayerFactory;
 import quaternary.zenbiomes.genlayer.GenLayerChoiceCircle;
 import quaternary.zenbiomes.genlayer.GenLayerConstant;
 import quaternary.zenbiomes.genlayer.GenLayerReplace;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenGetter;
+import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenClass("mods.zenbiomes.ZBLayers")
+@ZenRegister
 public class ZBLayers {
 	//Constant
 	public static Layer constant(int constant) {
@@ -30,7 +36,11 @@ public class ZBLayers {
 	}
 	
 	//circle.center(0, 0).radius(100).inside(a)
-	public static DSL.Circle_0 circle = (cx, cy) -> (radius) -> (inside) -> circle(cx, cy, radius, inside);
+	//todo this syntax no worky
+	@ZenGetter("circle")
+	public static DSL.Circle getCircle() {
+		return new DSL.Circle();
+	}
 	
 	//TODO other cool things:
 	//math functions
@@ -62,16 +72,57 @@ public class ZBLayers {
 			Layer with(int destination);
 		}
 		
-		public interface Circle_0 {
-			Circle_1 center(int x, int y);
-		}
-		
-		public interface Circle_1 {
-			Circle_2 radius(int radius);
-		}
-		
-		public interface Circle_2 {
-			Layer inside(Layer inside);
+		@ZenClass("mods.zenbiomes.dsl.circle")
+		@ZenRegister
+		public static class Circle extends PropertiedLayer {
+			public Circle() {
+				super("circle");
+				add("x", 0);
+				add("y", 0);
+				add("radius");
+				add("inside");
+			}
+			
+			@ZenMethod
+			public Circle x(int x) {
+				set("x", x);
+				return this;
+			}
+			
+			@ZenMethod
+			public Circle y(int y) {
+				set("y", y);
+				return this;
+			}
+			
+			@ZenMethod
+			public Circle center(int x, int y) {
+				x(x);
+				y(y);
+				return this;
+			}
+			
+			@ZenMethod
+			public Circle radius(int radius) {
+				set("radius", radius);
+				return this;
+			}
+			
+			@ZenMethod
+			public Circle inside(Layer inside) {
+				set("inside", inside);
+				return this;
+			}
+			
+			@Override
+			public Layer applyProperties(PropertiedLayer props) {
+				return circle(
+					props.get("x"),
+					props.get("y"),
+					props.get("radius"),
+					props.get("inside")
+				);
+			}
 		}
 	}
 }

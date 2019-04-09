@@ -112,18 +112,15 @@ public class VanillaLayers {
 	@ZenProperty
 	public static final Layer zoom = fromConstructor(GenLayerZoom::new);
 	
-	@ZenClass("mods.zenbiomes.VanillaLayers.internal")
-	@ZenRegister
 	public static class DSL {
-		
-		@ZenClass("mods.zenbiomes.VanillaLayers.internal.HillsBuilder")
+		@ZenClass("mods.zenbiomes.VanillaLayersDSLHills")
 		@ZenRegister
 		public interface Hills {
 			@ZenMethod
 			Layer river(Layer river);
 		}
 		
-		@ZenClass("mods.zenbiomes.VanillaLayers.internal.RiverBuilder")
+		@ZenClass("mods.zenbiomes.VanillaLayersDSLRiver")
 		@ZenRegister
 		public interface River extends Hills {}
 		

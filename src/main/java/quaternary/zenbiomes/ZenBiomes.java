@@ -19,7 +19,10 @@ public class ZenBiomes {
 	public static final String VERSION = "GRADLE:VERSION";
 	
 	@ZenMethod
-	public void uwu(Layer layer) {
-		System.out.println(layer);
+	public static void hi(Object whatever) {
+		System.out.println(whatever);
+		if(whatever != null) {
+			System.out.println(whatever.getClass().getSimpleName());
+		}
 	}
 }
