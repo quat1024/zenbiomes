@@ -1,8 +1,6 @@
 package quaternary.zenbiomes;
 
 import crafttweaker.annotations.ZenRegister;
-import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.*;
 import quaternary.zenbiomes.func.Layer;
@@ -53,7 +51,7 @@ public class VanillaLayers {
 	public static final Layer temperatureEdge = (parent) -> (seed, world) -> new GenLayerEdge(seed, parent.apply(seed + 1, world), GenLayerEdge.Mode.COOL_WARM);
 	
 	@ZenProperty
-	public static final Layer iceEdge = (parent) -> (seed, world) -> new GenLayerEdge(seed, parent.apply(seed + 1, world), GenLayerEdge.Mode.HEAT_ICE);
+	public static final Layer heatIceEdge = (parent) -> (seed, world) -> new GenLayerEdge(seed, parent.apply(seed + 1, world), GenLayerEdge.Mode.HEAT_ICE);
 	
 	@ZenProperty
 	public static final Layer specialEdge = (parent) -> (seed, world) -> new GenLayerEdge(seed, parent.apply(seed + 1, world), GenLayerEdge.Mode.SPECIAL);
@@ -72,16 +70,16 @@ public class VanillaLayers {
 	public static DSL.Hills hills = VanillaLayers::hills;
 	
 	@ZenProperty
-	public static final Layer seedIslands = (parent) -> (seed, world) -> new GenLayerIsland(seed);
+	public static final Layer island = (parent) -> (seed, world) -> new GenLayerIsland(seed);
 	
 	@ZenProperty
-	public static final Layer rareBiomes = fromConstructor(GenLayerRareBiome::new);
+	public static final Layer addSunflowerPlains = fromConstructor(GenLayerRareBiome::new);
 	
 	@ZenProperty
-	public static final Layer breakOceans = fromConstructor(GenLayerRemoveTooMuchOcean::new);
+	public static final Layer removeTooMuchOcean = fromConstructor(GenLayerRemoveTooMuchOcean::new);
 	
 	@ZenProperty
-	public static final Layer riverFilter = fromConstructor(GenLayerRiver::new);
+	public static final Layer river = fromConstructor(GenLayerRiver::new);
 	
 	@ZenProperty
 	public static final Layer riverInit = fromConstructor(GenLayerRiverInit::new);
