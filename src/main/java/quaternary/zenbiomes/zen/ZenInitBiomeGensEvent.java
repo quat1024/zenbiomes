@@ -4,7 +4,6 @@ import crafttweaker.annotations.ZenRegister;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import quaternary.zenbiomes.layer.Layer;
-import quaternary.zenbiomes.zen.Layers;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;

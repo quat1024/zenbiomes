@@ -8,6 +8,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import quaternary.zenbiomes.zen.ZenInitBiomeGensEvent;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -24,8 +26,10 @@ import java.util.List;
 @ZenRegister
 public class ZenBiomes {
 	public static final String MODID = "zenbiomes";
-	public static final String NAME = "Zen Biomes";
+	public static final String NAME = "ZenBiomes";
 	public static final String VERSION = "GRADLE:VERSION";
+	
+	public static final Logger LOG = LogManager.getLogger(NAME);
 	
 	@Mod.EventHandler
 	public static void preinit(FMLPreInitializationEvent e) {
@@ -44,6 +48,10 @@ public class ZenBiomes {
 		public static void initBiomeGens(WorldTypeEvent.InitBiomeGens e) {
 			ZenInitBiomeGensEvent z = new ZenInitBiomeGensEvent(e);
 			initBiomeGenHandlers.forEach(h -> h.handle(z));
+			
+			if(initBiomeGenHandlers.size() != 0) {
+				LOG.info("Replaced biome generation algorithm. Have a nice day!");
+			}
 		}
 	}
 }

@@ -22,7 +22,6 @@ public interface Layer extends Function1<LayerFactory, LayerFactory> {
 	
 	/// Composing layers with eachother
 	//with one
-	@ZenMethod
 	default Layer then(Layer next) {
 		return (parent) -> next.apply(this.apply(parent));
 	}
@@ -34,7 +33,6 @@ public interface Layer extends Function1<LayerFactory, LayerFactory> {
 	}
 	
 	//with vavr Stream
-	@ZenMethod
 	default Layer then(Stream<Layer> nextChain) {
 		return nextChain.foldLeft(this, Layer::then);
 	}
