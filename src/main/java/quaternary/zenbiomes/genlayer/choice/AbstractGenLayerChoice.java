@@ -40,8 +40,11 @@ public abstract class AbstractGenLayerChoice extends GenLayer {
 		
 		for(int xOff = 0; xOff < areaWidth; xOff++) {
 			for(int yOff = 0; yOff < areaHeight; yOff++) {
-				data[i] = choose(areaX + xOff, areaY + yOff) ? passData[i] : failData[i];
-				i++;
+				int x = areaX + xOff;
+				int y = areaY + yOff;
+				int index = xOff + yOff * areaWidth;
+				
+				data[index] = choose(x, y) ? passData[index] : failData[index];
 			}
 		}
 		

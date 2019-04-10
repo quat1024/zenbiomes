@@ -19,18 +19,18 @@ public class GenLayerFlip extends GenLayer {
 		int[] data = IntCache.getIntCache(areaWidth * areaHeight);
 		int[] parentData = parent.getInts(areaX, areaY, areaWidth, areaHeight);
 		
-		int dstIndex = 0;
 		for(int xOff = 0; xOff < areaWidth; xOff++) {
 			for(int yOff = 0; yOff < areaHeight; yOff++) {
 				int srcIndex;
 				if(horizontal) {
-					srcIndex = (areaWidth - xOff) + (yOff * areaHeight);
+					srcIndex = (areaWidth - xOff) + (yOff * areaWidth);
 				} else {
-					srcIndex = xOff + ((areaHeight - yOff) * areaHeight);
+					srcIndex = xOff + ((areaHeight - yOff) * areaWidth);
 				}
 				
+				int dstIndex = xOff + yOff * areaWidth;
+				
 				data[dstIndex] = parentData[srcIndex];
-				dstIndex++;
 			}
 		}
 		

@@ -71,6 +71,12 @@ public class ZenInitBiomeGensEvent {
 	}
 	
 	@ZenMethod
+	public void chainBothDetails(Layer layer) {
+		chainHighDetail(layer);
+		chainLowDetail(layer);
+	}
+	
+	@ZenMethod
 	public void defaultLowDetail() {
 		setLowDetail(getHighDetail().then(VanillaLayers.voronoiZoom));
 	}

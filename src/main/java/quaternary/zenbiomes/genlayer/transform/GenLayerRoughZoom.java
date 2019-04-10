@@ -14,12 +14,14 @@ public class GenLayerRoughZoom extends GenLayer {
 		int[] data = IntCache.getIntCache(areaWidth * areaHeight);
 		int[] parentData = parent.getInts(areaX / 2, areaY / 2, areaWidth / 2, areaHeight / 2);
 		
-		int halfHeight = areaHeight / 2;
+		int halfWidth = areaWidth / 2;
 		
-		int dstIndex = 0;
 		for(int xOff = 0; xOff < areaWidth; xOff++) {
 			for(int yOff = 0; yOff < areaHeight; yOff++) {
-				data[dstIndex] = parentData[(xOff / 2) + (yOff / 2) * halfHeight];
+				int dstIndex = xOff + yOff * areaWidth;
+				int srcIndex = ((xOff / 2) + (yOff / 2)) * halfWidth;
+				
+				data[dstIndex] = parentData[srcIndex];
 				dstIndex++;
 			}
 		}

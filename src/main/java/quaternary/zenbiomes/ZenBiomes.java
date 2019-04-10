@@ -43,7 +43,6 @@ public class ZenBiomes {
 		public static void initBiomeGens(WorldTypeEvent.InitBiomeGens e) {
 			ZenInitBiomeGensEvent z = new ZenInitBiomeGensEvent(e);
 			initBiomeGenHandlers.forEach(h -> h.handle(z));
-			System.out.println("LAHDLKASJDLKJASKLDALKSDJLKASKLDJSALKDASJD");
 		}
 	}
 }
