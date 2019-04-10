@@ -1,7 +1,6 @@
-package quaternary.zenbiomes.func;
+package quaternary.zenbiomes.layer;
 
 import io.vavr.Function2;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 

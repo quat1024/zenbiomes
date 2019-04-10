@@ -1,8 +1,7 @@
-package quaternary.zenbiomes.etc;
+package quaternary.zenbiomes.layer;
 
 import crafttweaker.annotations.ZenRegister;
-import quaternary.zenbiomes.func.Layer;
-import quaternary.zenbiomes.func.LayerFactory;
+import quaternary.zenbiomes.etc.Etc;
 import stanhebben.zenscript.annotations.ZenClass;
 
 import java.util.HashMap;

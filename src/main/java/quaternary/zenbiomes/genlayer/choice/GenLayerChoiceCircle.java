@@ -2,8 +2,7 @@ package quaternary.zenbiomes.genlayer.choice;
 
 import crafttweaker.annotations.ZenRegister;
 import net.minecraft.world.gen.layer.GenLayer;
-import quaternary.zenbiomes.func.Layer;
-import quaternary.zenbiomes.func.LayerFactory;
+import quaternary.zenbiomes.layer.Layer;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

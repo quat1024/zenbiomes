@@ -1,10 +1,10 @@
-package quaternary.zenbiomes.func;
+package quaternary.zenbiomes.layer;
 
 import crafttweaker.annotations.ZenRegister;
 import io.vavr.Function1;
 import io.vavr.collection.Stream;
 import net.minecraft.world.gen.layer.GenLayer;
-import quaternary.zenbiomes.Layers;
+import quaternary.zenbiomes.zen.Layers;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

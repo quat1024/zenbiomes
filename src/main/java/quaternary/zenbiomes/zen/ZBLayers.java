@@ -1,7 +1,7 @@
-package quaternary.zenbiomes;
+package quaternary.zenbiomes.zen;
 
 import crafttweaker.annotations.ZenRegister;
-import quaternary.zenbiomes.func.Layer;
+import quaternary.zenbiomes.layer.Layer;
 import quaternary.zenbiomes.genlayer.choice.GenLayerChoiceCircle;
 import quaternary.zenbiomes.genlayer.GenLayerConstant;
 import quaternary.zenbiomes.genlayer.GenLayerReplace;
