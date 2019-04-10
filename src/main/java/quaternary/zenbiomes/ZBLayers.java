@@ -1,46 +1,38 @@
 package quaternary.zenbiomes;
 
 import crafttweaker.annotations.ZenRegister;
-import quaternary.zenbiomes.etc.PropertiedLayer;
 import quaternary.zenbiomes.func.Layer;
 import quaternary.zenbiomes.genlayer.choice.GenLayerChoiceCircle;
 import quaternary.zenbiomes.genlayer.GenLayerConstant;
 import quaternary.zenbiomes.genlayer.GenLayerReplace;
 import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.ZenProperty;
 
 @ZenClass("mods.zenbiomes.ZBLayers")
 @ZenRegister
 public class ZBLayers {
 	//Constant
+	@ZenMethod
 	public static Layer constant(int constant) {
 		return (parent) -> (seed, world) -> new GenLayerConstant(constant);
 	}
 	
 	//Replace
 	//replace(3, 4)
+	@ZenMethod
 	public static Layer replace(int source, int destination) {
 		return (parent) -> (seed, world) -> new GenLayerReplace(source, destination, parent.apply(seed + 1, world));
 	}
 	
 	//replace(3).with(4)
+	@ZenMethod
 	public static DSL.Replace_0 replace(int source) {
 		return (destination) -> replace(source, destination);
 	}
 	
-	//Circle
-	//circle(0, 0, 100, a, b)
-	public static Layer circle(int centerX, int centerY, int radius, Layer inside) {
-		return (parent) -> (seed, world) -> new GenLayerChoiceCircle(centerX, centerY, radius, inside.flatten().apply(seed + 1, world), parent.apply(seed + 1, world));
-	}
-	
-	//circle.center(0, 0).radius(100).inside(a)
-	//todo this syntax no worky
-	@ZenGetter("circle")
-	public static DSL.Circle getCircle() {
-		return new DSL.Circle();
-	}
+	@ZenProperty
+	public static final GenLayerChoiceCircle.ZenLayer circle = new GenLayerChoiceCircle.ZenLayer();
 	
 	//TODO other cool things:
 	//transformations
@@ -62,61 +54,11 @@ public class ZBLayers {
 	//Mostly internal stuff relating to syntax sugar on ZenScript's end.
 	public static class DSL {
 		//TODO make this not bad (arbitrary arg order?)
-		public interface Replace_0 {
-			Layer with(int destination);
-		}
-		
-		@ZenClass("mods.zenbiomes.dsl.circle")
+		@ZenClass("mods.zenbiomes.internal.Replace_0")
 		@ZenRegister
-		public static class Circle extends PropertiedLayer {
-			public Circle() {
-				super("circle");
-				add("x", 0);
-				add("y", 0);
-				add("radius");
-				add("inside");
-			}
-			
+		public interface Replace_0 {
 			@ZenMethod
-			public Circle x(int x) {
-				set("x", x);
-				return this;
-			}
-			
-			@ZenMethod
-			public Circle y(int y) {
-				set("y", y);
-				return this;
-			}
-			
-			@ZenMethod
-			public Circle center(int x, int y) {
-				x(x);
-				y(y);
-				return this;
-			}
-			
-			@ZenMethod
-			public Circle radius(int radius) {
-				set("radius", radius);
-				return this;
-			}
-			
-			@ZenMethod
-			public Circle inside(Layer inside) {
-				set("inside", inside);
-				return this;
-			}
-			
-			@Override
-			public Layer applyProperties(PropertiedLayer props) {
-				return circle(
-					props.get("x"),
-					props.get("y"),
-					props.get("radius"),
-					props.get("inside")
-				);
-			}
+			Layer with(int destination);
 		}
 	}
 }

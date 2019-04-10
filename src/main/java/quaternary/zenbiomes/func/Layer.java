@@ -3,6 +3,7 @@ package quaternary.zenbiomes.func;
 import crafttweaker.annotations.ZenRegister;
 import io.vavr.Function1;
 import io.vavr.collection.Stream;
+import net.minecraft.world.gen.layer.GenLayer;
 import quaternary.zenbiomes.Layers;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -47,5 +48,9 @@ public interface Layer extends Function1<LayerFactory, LayerFactory> {
 	@ZenMethod //TODO does this need to be exposed at all to zen
 	default LayerFactory flatten() {
 		return apply(null);
+	}
+	
+	static Layer ofVanilla(GenLayer layer) {
+		return (parent) -> LayerFactory.ofVanilla(layer);
 	}
 }

@@ -48,6 +48,12 @@ public abstract class AbstractGenLayerChoice extends GenLayer {
 		return data;
 	}
 	
+	@Override
+	public void initWorldGenSeed(long seed) {
+		super.initWorldGenSeed(seed);
+		pass.initWorldGenSeed(seed);
+	}
+	
 	/**
 	 * Choose between the two genlayers for this position.
 	 */

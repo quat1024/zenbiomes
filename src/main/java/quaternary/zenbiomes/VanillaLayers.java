@@ -29,20 +29,16 @@ public class VanillaLayers {
 	
 	//biome
 	@ZenProperty
-	public static final Layer biome = (parent) -> (seed, world) -> {
-		//So for customized worlds where you can set the biome to a fixed biome...
-		//This is where that is applied.
-		//However there doesn't seem to be a way to get the "real" customized world chunkgensettings.
-		//It's turned into a string, and only saved as a string from places I can reach it from World.
-		//No matter, though. I'll just make my own. The only prop that matters is fixed biome anyways.
+	public static final Layer biome = (parent) -> (seed, wtype) -> {
+		//TODO reimplement this using worldtype instead of world (possible...?)
+		//basically need to get the fixed biome
 		ChunkGeneratorSettings settings = null;
-		if(world.getWorldType() == WorldType.CUSTOMIZED && world.getBiomeProvider().isFixedBiome()) {
+		if(true) {
 			ChunkGeneratorSettings.Factory oof = new ChunkGeneratorSettings.Factory();
-			oof.fixedBiome = Biome.getIdForBiome(world.getBiomeProvider().getFixedBiome());
 			settings = oof.build();
 		}
 		
-		return new GenLayerBiome(seed, parent.apply(seed + 1, world), world.getWorldType(), settings);
+		return new GenLayerBiome(seed, parent.apply(seed + 1, wtype), wtype, settings);
 	};
 	//genlayerbiome (needs worldtype, chunkgensettings...?)
 	
@@ -76,7 +72,7 @@ public class VanillaLayers {
 	public static DSL.Hills hills = VanillaLayers::hills;
 	
 	@ZenProperty
-	public static final Layer island = (parent) -> (seed, world) -> new GenLayerIsland(seed);
+	public static final Layer seedIslands = (parent) -> (seed, world) -> new GenLayerIsland(seed);
 	
 	@ZenProperty
 	public static final Layer rareBiomes = fromConstructor(GenLayerRareBiome::new);
@@ -123,7 +119,6 @@ public class VanillaLayers {
 		@ZenClass("mods.zenbiomes.VanillaLayersDSLRiver")
 		@ZenRegister
 		public interface River extends Hills {}
-		
 	}
 	
 	private static Layer fromConstructor(BiFunction<Long, GenLayer, GenLayer> cons) {
